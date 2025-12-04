@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Início - Sistema Template{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="hero-section">
+        <h1 class="hero-title">Bem-vindo, {{ user.username }}!</h1>
+        <p class="hero-subtitle">Você está autenticado no sistema</p>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Dashboard</h3>
+            <p class="card-text">Visualize suas estatísticas e relatórios</p>
+            <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">Acessar</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">👤</div>
+            <h3 class="card-title">Perfil</h3>
+            <p class="card-text">Gerencie suas informações pessoais</p>
+            <a href="#" class="btn btn-secondary">Em breve</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3 class="card-title">Configurações</h3>
+            <p class="card-text">Ajuste as preferências do sistema</p>
+            <a href="#" class="btn btn-secondary">Em breve</a>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <h2>Informações da Conta</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <strong>Usuário:</strong> {{ user.username }}
+            </div>
+            <div class="info-item">
+                <strong>Email:</strong> {{ user.email }}
+            </div>
+            <div class="info-item">
+                <strong>Conta criada em:</strong> {{ user.created_at.strftime('%d/%m/%Y às %H:%M') }}
+            </div>
+            <div class="info-item">
+                <strong>Status:</strong> 
+                <span class="badge badge-success">{{ 'Ativo' if user.is_active else 'Inativo' }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

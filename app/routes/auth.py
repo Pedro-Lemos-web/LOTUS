@@ -1,7 +1,7 @@
 # Importar componentes necessários do Flask
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 # Importar funções de autenticação do Flask-Login
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 # Importar o modelo de usuário e a instância do banco de dados
 from app.models.user import User
 from app import db
@@ -11,7 +11,7 @@ from app import db
 # url_prefix='/auth' significa que todas as rotas terão /auth/ no início
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@auth_bp.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST']) # decorador para definir a rota /login
 def login():
     """
     Rota de login do sistema.
@@ -50,9 +50,9 @@ def login():
                 flash(f'Bem-vindo, {user.username}!', 'success')
                 
                 # Redirecionar para a página que o usuário tentou acessar antes do login
-                # Se não houver página anterior, vai para a página inicial
+                # Se não houver página anterior, vai para a página home
                 next_page = request.args.get('next')
-                return redirect(next_page or url_for('main.index'))
+                return redirect(next_page or url_for('main.home'))
             else:
                 flash('Sua conta está desativada.', 'danger')
         else:
@@ -72,8 +72,8 @@ def logout():
         Redireciona para a página de login
     """
     # Encerrar a sessão do usuário
-    logout_user()
     flash('Você saiu da sua conta.', 'info')
+    logout_user()
     return redirect(url_for('auth.login'))
 
 @auth_bp.route('/register', methods=['GET', 'POST'])

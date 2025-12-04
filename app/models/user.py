@@ -45,7 +45,7 @@ class User(UserMixin, db.Model):
     
     # is_active: Indica se a conta está ativa (permite desativar sem deletar)
     is_active = db.Column(db.Boolean, default=True)
-    
+
     def set_password(self, password):
         """
         Criptografa e armazena a senha do usuário.
@@ -78,6 +78,15 @@ class User(UserMixin, db.Model):
             str: Representação legível do usuário
         """
         return f'<User {self.username}>'
+    
+    def set_is_active(self, active: bool):
+        """
+        Define o status de atividade da conta do usuário.
+        
+        Args:
+            active: Booleano indicando se a conta deve ser ativa ou não
+        """
+        self.is_active = active
 
 @login_manager.user_loader
 def load_user(user_id):

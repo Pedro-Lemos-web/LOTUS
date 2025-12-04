@@ -1,144 +1,100 @@
 {% extends "base.html" %}
 
-{% block title %}Galeria Rotativa - Início{% endblock %}
+{% block title %}Sistema Template - Flask App{% endblock %}
 
 {% block content %}
+<div class="landing-page">
+    <!-- Hero Section -->
+    <section class="landing-hero">
+        <div class="container">
+            <h1 class="landing-title">Sistema Template Flask</h1>
+            <p class="landing-subtitle">Uma aplicação web moderna construída com Flask, SQLAlchemy e autenticação segura</p>
+            <div class="landing-actions">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg">Fazer Login</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-secondary btn-lg">Criar Conta</a>
+            </div>
+        </div>
+    </section>
 
-<section class="hero-section">
-<h1 class="hero-title">Sua Galeria Rotativa Neon</h1>
-<p class="hero-subtitle">Descubra as imagens mais recentes enviadas pela comunidade.</p>
+    <!-- Features Section -->
+    <section class="landing-features">
+        <div class="container">
+            <h2 class="section-title">Recursos do Sistema</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Autenticação Segura</h3>
+                    <p>Sistema completo de login e registro com criptografia de senhas usando bcrypt</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">�</div>
+                    <h3>Dashboard Interativo</h3>
+                    <p>Visualize suas informações e estatísticas em um painel organizado e intuitivo</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Design Responsivo</h3>
+                    <p>Interface moderna que se adapta perfeitamente a qualquer dispositivo</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Performance</h3>
+                    <p>Construído com as melhores práticas para garantir rapidez e eficiência</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗄️</div>
+                    <h3>Banco de Dados</h3>
+                    <p>SQLAlchemy ORM para gerenciamento robusto e escalável de dados</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Segurança</h3>
+                    <p>Proteção CSRF, sessões seguras e validação de dados em todas as requisições</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-{% if user.is_authenticated %}
-    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary mt-4" style="margin-top: 20px;">
-        <i class="fas fa-cloud-upload-alt"></i> Ir para Dashboard e Upload
-    </a>
-{% endif %}
+    <!-- Tech Stack Section -->
+    <section class="landing-tech">
+        <div class="container">
+            <h2 class="section-title">Tecnologias Utilizadas</h2>
+            <div class="tech-list">
+                <div class="tech-item">
+                    <span class="tech-badge">Flask</span>
+                    <p>Framework web Python minimalista e poderoso</p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">SQLAlchemy</span>
+                    <p>ORM para gerenciamento de banco de dados</p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">Flask-Login</span>
+                    <p>Gerenciamento de sessões de usuário</p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">Bcrypt</span>
+                    <p>Criptografia segura de senhas</p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">Jinja2</span>
+                    <p>Engine de templates para páginas dinâmicas</p>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-badge">SQLite</span>
+                    <p>Banco de dados leve e eficiente</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-</section>
-
-<section class="carousel-section">
-<div class="image-carousel" id="imageCarousel">
-<!-- As imagens seriam carregadas dinamicamente do banco de dados aqui. -->
-<!-- Por enquanto, usamos placeholders. -->
-<img class="carousel-image active" src="https://www.google.com/search?q=https://placehold.co/900x500/ff00ff/000000%3Ftext%3DArte%2BDigital%2B%25231" alt="Imagem 1" data-index="0">
-<img class="carousel-image" src="https://www.google.com/search?q=https://placehold.co/900x500/00ffff/000000%3Ftext%3DPaisagem%2BCiberpunk%2B%25232" alt="Imagem 2" data-index="1">
-<img class="carousel-image" src="https://www.google.com/search?q=https://placehold.co/900x500/ff3333/000000%3Ftext%3DAbstrato%2BNeon%2B%25233" alt="Imagem 3" data-index="2">
-<img class="carousel-image" src="https://www.google.com/search?q=https://placehold.co/900x500/00ff00/000000%3Ftext%3DGeometria%2BVibrante%2B%25234" alt="Imagem 4" data-index="3">
-
-    <button class="prev-btn" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="next-btn" onclick="changeSlide(1)">&#10095;</button>
+    <!-- CTA Section -->
+    <section class="landing-cta">
+        <div class="container">
+            <h2>Pronto para começar?</h2>
+            <p>Crie sua conta gratuitamente e explore todas as funcionalidades do sistema</p>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">Criar Conta Grátis</a>
+        </div>
+    </section>
 </div>
-
-<div class="carousel-indicators" id="carouselIndicators">
-    <!-- Indicadores JS serão injetados aqui -->
-</div>
-
-
-</section>
-
-<script>
-const carousel = document.getElementById('imageCarousel');
-const images = Array.from(carousel.querySelectorAll('.carousel-image'));
-const indicatorsContainer = document.getElementById('carouselIndicators');
-let currentIndex = 0;
-let autoRotateInterval;
-
-// --- Funções de Criação de Elementos ---
-
-function createIndicators() {
-    indicatorsContainer.innerHTML = &#39;&#39;;
-    images.forEach((_, index) =&gt; {
-        const indicator = document.createElement(&#39;span&#39;);
-        indicator.classList.add(&#39;indicator&#39;);
-        if (index === 0) {
-            indicator.classList.add(&#39;active&#39;);
-        }
-        indicator.dataset.index = index;
-        indicator.onclick = () =&gt; showSlide(index);
-        indicatorsContainer.appendChild(indicator);
-    });
-}
-
-function updateIndicators() {
-    const indicators = indicatorsContainer.querySelectorAll(&#39;.indicator&#39;);
-    indicators.forEach((indicator, index) =&gt; {
-        indicator.classList.toggle(&#39;active&#39;, index === currentIndex);
-    });
-}
-
-// --- Lógica do Carrossel ---
-
-function showSlide(index) {
-    // Garantir que o índice está dentro dos limites
-    currentIndex = (index + images.length) % images.length;
-    
-    images.forEach((img, i) =&gt; {
-        // Alternar a classe &#39;active&#39;
-        img.classList.toggle(&#39;active&#39;, i === currentIndex);
-    });
-    
-    updateIndicators();
-}
-
-function changeSlide(step) {
-    stopAutoRotate(); // Parar a rotação ao interagir
-    showSlide(currentIndex + step);
-    startAutoRotate(); // Reiniciar a rotação
-}
-
-function startAutoRotate() {
-    // Limpar qualquer intervalo anterior antes de iniciar um novo
-    if (autoRotateInterval) {
-        clearInterval(autoRotateInterval);
-    }
-    // Configurar intervalo para avançar a cada 5 segundos
-    autoRotateInterval = setInterval(() =&gt; {
-        showSlide(currentIndex + 1);
-    }, 5000);
-}
-
-function stopAutoRotate() {
-    if (autoRotateInterval) {
-        clearInterval(autoRotateInterval);
-    }
-}
-
-// --- Inicialização ---
-
-window.onload = function() {
-    createIndicators(); // Criar os indicadores
-    showSlide(0);      // Mostrar a primeira imagem
-    startAutoRotate(); // Iniciar a rotação automática
-
-    // Adicionar eventos de toque para navegação em dispositivos móveis
-    let touchstartX = 0;
-    let touchendX = 0;
-    
-    carousel.addEventListener(&#39;touchstart&#39;, e =&gt; {
-        touchstartX = e.changedTouches[0].screenX;
-    }, false);
-
-    carousel.addEventListener(&#39;touchend&#39;, e =&gt; {
-        touchendX = e.changedTouches[0].screenX;
-        handleGesture();
-    }, false);
-
-    function handleGesture() {
-        const sensitivity = 50; // Mínimo de pixels para considerar um swipe
-        const diff = touchendX - touchstartX;
-        
-        if (diff &gt; sensitivity) {
-            // Swipe para a direita (previous)
-            changeSlide(-1); 
-        } else if (diff &lt; -sensitivity) {
-            // Swipe para a esquerda (next)
-            changeSlide(1);
-        }
-    }
-};
-
-
-</script>
-
 {% endblock %}

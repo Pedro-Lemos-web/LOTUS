@@ -2,34 +2,33 @@
 
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}Galeria Rotativa Flask{% endblock %}</title>
-<!-- Incluindo Icones para Estilização (Font Awesome) -->
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Monitoramento{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-
-<header class="navbar">
-    <div class="container">
-        <div class="navbar-brand">
-            <a href="{{ url_for('main.index') }}">
-                <i class="fas fa-camera-retro"></i> Galeria Neon
-            </a>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{{ url_for('main.index') }}">
+                    Sistema de Monitoramento
+                </a>
+            </div>
+            <div class="navbar-menu">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.home') }}">Início</a>
+                    <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+                    <span class="navbar-user">Olá, {{ current_user.username }}!</span>
+                    <a href="{{ url_for('auth.logout') }}" class="btn-logout">Sair</a>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}">Login</a>
+                    <a href="{{ url_for('auth.register') }}">Cadastrar</a>
+                {% endif %}
+            </div>
         </div>
-        <nav class="navbar-menu">
-            {% if user.is_authenticated %}
-                <span class="navbar-user">Olá, {{ user.username }}</span>
-                <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
-                <a href="{{ url_for('auth.logout') }}" class="btn-logout">Sair</a>
-            {% else %}
-                <a href="{{ url_for('auth.login') }}">Login</a>
-                <a href="{{ url_for('auth.register') }}" class="btn-primary">Registro</a>
-            {% endif %}
-        </nav>
-    </div>
-</header>
+    </nav>
 
 <main class="main-content">
     <div class="container">
