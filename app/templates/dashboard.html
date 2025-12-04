@@ -1,86 +1,72 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard - Sistema Template{% endblock %}
+{% block title %}Sobre o Projeto e Criadores{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="page-header">
-        <h1>Dashboard</h1>
-        <p>Painel de controle do sistema</p>
+        <h1>Sobre o Sistema e Seus Criadores</h1>
+        <p>Conheça a equipe por trás do projeto "Sistema Template" e seus objetivos.</p>
     </div>
 
-    <div class="dashboard-stats">
-        <div class="stat-card">
-            <div class="stat-icon">📈</div>
-            <div class="stat-content">
-                <h3 class="stat-value">0</h3>
-                <p class="stat-label">Total de Acessos</p>
-            </div>
+    <div class="dashboard-content dashboard-info">
+        
+        <div class="dashboard-section project-info">
+            <h2>📜 Sobre o Projeto Template</h2>
+            
+            <p>O Sistema Template foi desenvolvido como parte da disciplina **IENH Dev Sistemas II** com o objetivo de demonstrar o desenvolvimento de uma aplicação web completa e funcional utilizando o framework Python Flask.</p>
+            
+            <p>Os principais focos do projeto são:</p>
+            <ul class="project-features">
+                <li>**Autenticação Robusta:** Implementação de rotas de Login, Cadastro e Logout com segurança.</li>
+                <li>**Templates Dinâmicos:** Utilização do Jinja2 para reutilização de código e exibição de dados dinâmicos.</li>
+                <li>**Estrutura Modular:** Organização do código em blueprints (ex: `auth`, `main`) para escalabilidade.</li>
+                <li>**Design Responsivo:** Aplicação de CSS (esperado no `style.css`) para boa experiência em diferentes dispositivos.</li>
+            </ul>
+            
+            <blockquote class="project-quote">
+                "Este projeto serve como um modelo fundamental (boilerplate) para futuros desenvolvimentos, permitindo que novos módulos sejam adicionados de forma eficiente."
+            </blockquote>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-icon">✅</div>
-            <div class="stat-content">
-                <h3 class="stat-value">0</h3>
-                <p class="stat-label">Tarefas Concluídas</p>
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">⏰</div>
-            <div class="stat-content">
-                <h3 class="stat-value">0</h3>
-                <p class="stat-label">Tarefas Pendentes</p>
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">👥</div>
-            <div class="stat-content">
-                <h3 class="stat-value">1</h3>
-                <p class="stat-label">Usuários Ativos</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="dashboard-content">
-        <div class="dashboard-section">
-            <h2>Atividades Recentes</h2>
-            <div class="activity-list">
-                <div class="activity-item">
-                    <span class="activity-icon">🔔</span>
-                    <div class="activity-details">
-                        <p class="activity-text">Você fez login no sistema</p>
-                        <span class="activity-time">Agora</span>
+        <div class="dashboard-section creators-info">
+            <h2>👥 Conheça os Criadores</h2>
+            <p>O desenvolvimento e concepção deste projeto foram realizados pelos seguintes alunos:</p>
+            
+            <div class="creator-list">
+                <div class="creator-card">
+                    <span class="creator-icon">🎓</span>
+                    <div class="creator-details">
+                        <h3 class="creator-name">Nome do Aluno(a) 1</h3>
+                        <p class="creator-role">Desenvolvedor Backend (Flask)</p>
+                        <a href="#" class="creator-contact">Email / Link</a>
                     </div>
                 </div>
-                <div class="activity-item">
-                    <span class="activity-icon">✨</span>
-                    <div class="activity-details">
-                        <p class="activity-text">Conta criada com sucesso</p>
-                        <span class="activity-time">{{ user.created_at.strftime('%d/%m/%Y') }}</span>
+
+                <div class="creator-card">
+                    <span class="creator-icon">🎨</span>
+                    <div class="creator-details">
+                        <h3 class="creator-name">Nome do Aluno(a) 2</h3>
+                        <p class="creator-role">Desenvolvedor Frontend (HTML/CSS/JS)</p>
+                        <a href="#" class="creator-contact">Email / Link</a>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="dashboard-section">
-            <h2>Ações Rápidas</h2>
-            <div class="quick-actions">
-                <button class="action-btn" onclick="alert('Funcionalidade em desenvolvimento')">
-                    <span class="action-icon">➕</span>
-                    Nova Tarefa
-                </button>
-                <button class="action-btn" onclick="alert('Funcionalidade em desenvolvimento')">
-                    <span class="action-icon">📄</span>
-                    Gerar Relatório
-                </button>
-                <button class="action-btn" onclick="alert('Funcionalidade em desenvolvimento')">
-                    <span class="action-icon">💾</span>
-                    Exportar Dados
-                </button>
+                <div class="creator-card">
+                    <span class="creator-icon">🛠️</span>
+                    <div class="creator-details">
+                        <h3 class="creator-name">Nome do Aluno(a) 3</h3>
+                        <p class="creator-role">Designer e Documentação</p>
+                        <a href="#" class="creator-contact">Email / Link</a>
+                    </div>
+                </div>
+
             </div>
+            
+            <h3>Agradecimentos</h3>
+            <p>Agradecemos ao professor(a) responsável pela disciplina pelo suporte e orientação durante o desenvolvimento.</p>
         </div>
     </div>
 </div>
+
 {% endblock %}

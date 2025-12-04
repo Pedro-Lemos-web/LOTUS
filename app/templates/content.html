@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Início - Galeria{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+<div class="container carousel-container">
+    <h2>Destaques da Galeria</h2>
+    <div class="image-carousel">
+        <img src="{{ url_for('static', filename='images/foto1.jpg') }}" alt="Foto 1" class="carousel-image active">
+        <img src="{{ url_for('static', filename='images/foto2.jpg') }}" alt="Foto 2" class="carousel-image">
+        <img src="{{ url_for('static', filename='images/foto3.jpg') }}" alt="Foto 3" class="carousel-image">
+    </div>
+    <div class="carousel-controls">
+        <button id="prev-btn">Anterior</button>
+        <button id="next-btn">Próximo</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

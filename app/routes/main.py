@@ -4,33 +4,35 @@ from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 
 # Criar Blueprint para rotas principais da aplicação
-# Sem url_prefix, as rotas começam diretamente da raiz (/)
 main_bp = Blueprint('main', __name__)
 
+--- 
+
 @main_bp.route('/')
-@login_required  # Decorator que protege a rota - requer autenticação
+# REMOVIDO: @login_required
 def index():
     """
-    Página inicial do sistema (protegida).
+    Página inicial da Galeria Rotativa (PÚBLICA).
     
-    Apenas usuários autenticados podem acessar esta página.
-    Se não autenticado, será redirecionado para a página de login.
+    Qualquer usuário pode acessar. Se o usuário estiver autenticado,
+    o current_user terá os dados dele; caso contrário, será anônimo.
     
     Returns:
         Renderiza o template index.html com dados do usuário atual
     """
     # current_user é um objeto especial do Flask-Login que representa
-    # o usuário atualmente autenticado na sessão
+    # o usuário autenticado ou um objeto AnonymousUser se não logado.
     return render_template('index.html', user=current_user)
 
+---
+
 @main_bp.route('/dashboard')
-@login_required  # Esta rota também requer autenticação
+@login_required  # MANTIDO: Esta rota (Dashboard) requer autenticação
 def dashboard():
     """
-    Página de dashboard (protegida).
+    Página de dashboard (PROTEGIDA).
     
-    Exemplo de rota adicional protegida. Pode ser usada para
-    exibir estatísticas, relatórios ou informações do usuário.
+    Exemplo de rota que exige login para acesso.
     
     Returns:
         Renderiza o template dashboard.html com dados do usuário

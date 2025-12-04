@@ -1,59 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Login - Sistema Template{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="auth-container">
-        <div class="auth-card">
-            <h1 class="auth-title">Login</h1>
-            <p class="auth-subtitle">Entre com suas credenciais</p>
-            
-            <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
-                <div class="form-group">
-                    <label for="username">Usuário</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        class="form-control" 
-                        placeholder="Digite seu usuário"
-                        required
-                        autofocus
-                    >
-                </div>
 
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        class="form-control" 
-                        placeholder="Digite sua senha"
-                        required
-                    >
-                </div>
+<div class="container auth-container">
+<div class="auth-card">
+<h1 class="auth-title">Acesso à Galeria</h1>
+<p class="auth-subtitle">Faça login para gerenciar suas imagens e uploads.</p>
 
-                <div class="form-group form-check">
-                    <input 
-                        type="checkbox" 
-                        id="remember" 
-                        name="remember" 
-                        class="form-check-input"
-                    >
-                    <label for="remember" class="form-check-label">Lembrar-me</label>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block">
-                    Entrar
-                </button>
-            </form>
-
-            <div class="auth-footer">
-                <p>Não tem uma conta? <a href="{{ url_for('auth.register') }}">Cadastre-se</a></p>
-            </div>
+    <!-- Formulário de Login -->
+    <form class="auth-form" method="POST" action="{{ url_for('auth.login') }}">
+        
+        <div class="form-group">
+            <label for="username">Nome de Usuário</label>
+            <input type="text" id="username" name="username" class="form-control" required>
         </div>
+        
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        
+        <div class="form-group form-check">
+            <input type="checkbox" id="remember" name="remember" class="form-check-input" value="True">
+            <label class="form-check-label" for="remember">Lembrar-me</label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">
+            Entrar
+        </button>
+    </form>
+    
+    <!-- Link de Registro -->
+    <div class="auth-footer">
+        Ainda não tem conta? 
+        <a href="{{ url_for('auth.register') }}">Crie uma conta</a>
     </div>
+</div>
+
+
 </div>
 {% endblock %}

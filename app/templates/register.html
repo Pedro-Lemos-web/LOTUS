@@ -1,91 +1,49 @@
 {% extends "base.html" %}
 
-{% block title %}Cadastro - Sistema Template{% endblock %}
+{% block title %}Registro de Usuário{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="auth-container">
-        <div class="auth-card">
-            <h1 class="auth-title">Cadastro</h1>
-            <p class="auth-subtitle">Crie sua conta</p>
-            
-            <form method="POST" action="{{ url_for('auth.register') }}" class="auth-form">
-                <div class="form-group">
-                    <label for="username">Usuário</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        class="form-control" 
-                        placeholder="Escolha um nome de usuário"
-                        required
-                        autofocus
-                    >
-                </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        class="form-control" 
-                        placeholder="seu@email.com"
-                        required
-                    >
-                </div>
+<div class="container auth-container">
+<div class="auth-card">
+<h1 class="auth-title">Crie sua Conta</h1>
+<p class="auth-subtitle">Junte-se à galeria rotativa para fazer uploads.</p>
 
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        class="form-control" 
-                        placeholder="Crie uma senha"
-                        required
-                        minlength="6"
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="confirm_password">Confirmar Senha</label>
-                    <input 
-                        type="password" 
-                        id="confirm_password" 
-                        name="confirm_password" 
-                        class="form-control" 
-                        placeholder="Digite a senha novamente"
-                        required
-                        minlength="6"
-                    >
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block">
-                    Cadastrar
-                </button>
-            </form>
-
-            <div class="auth-footer">
-                <p>Já tem uma conta? <a href="{{ url_for('auth.login') }}">Faça login</a></p>
-            </div>
+    <!-- Formulário de Registro -->
+    <form class="auth-form" method="POST" action="{{ url_for('auth.register') }}">
+        
+        <div class="form-group">
+            <label for="username">Nome de Usuário</label>
+            <input type="text" id="username" name="username" class="form-control" required>
         </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="confirm_password">Confirme a Senha</label>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">
+            Registrar
+        </button>
+    </form>
+    
+    <!-- Link para Login -->
+    <div class="auth-footer">
+        Já tem uma conta? 
+        <a href="{{ url_for('auth.login') }}">Faça login</a>
     </div>
 </div>
-{% endblock %}
 
-{% block extra_js %}
-<script>
-    // Validação de senha no lado do cliente
-    document.querySelector('.auth-form').addEventListener('submit', function(e) {
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm_password').value;
-        
-        if (password !== confirmPassword) {
-            e.preventDefault();
-            alert('As senhas não coincidem!');
-            document.getElementById('confirm_password').focus();
-        }
-    });
-</script>
+
+</div>
 {% endblock %}

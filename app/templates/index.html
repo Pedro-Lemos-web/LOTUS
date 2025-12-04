@@ -1,54 +1,144 @@
 {% extends "base.html" %}
 
-{% block title %}Início - Sistema Template{% endblock %}
+{% block title %}Galeria Rotativa - Início{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="hero-section">
-        <h1 class="hero-title">Bem-vindo, {{ user.username }}!</h1>
-        <p class="hero-subtitle">Você está autenticado no sistema</p>
-    </div>
 
-    <div class="cards-grid">
-        <div class="card">
-            <div class="card-icon">📊</div>
-            <h3 class="card-title">Dashboard</h3>
-            <p class="card-text">Visualize suas estatísticas e relatórios</p>
-            <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">Acessar</a>
-        </div>
+<section class="hero-section">
+<h1 class="hero-title">Sua Galeria Rotativa Neon</h1>
+<p class="hero-subtitle">Descubra as imagens mais recentes enviadas pela comunidade.</p>
 
-        <div class="card">
-            <div class="card-icon">👤</div>
-            <h3 class="card-title">Perfil</h3>
-            <p class="card-text">Gerencie suas informações pessoais</p>
-            <a href="#" class="btn btn-secondary">Em breve</a>
-        </div>
+{% if user.is_authenticated %}
+    <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary mt-4" style="margin-top: 20px;">
+        <i class="fas fa-cloud-upload-alt"></i> Ir para Dashboard e Upload
+    </a>
+{% endif %}
 
-        <div class="card">
-            <div class="card-icon">⚙️</div>
-            <h3 class="card-title">Configurações</h3>
-            <p class="card-text">Ajuste as preferências do sistema</p>
-            <a href="#" class="btn btn-secondary">Em breve</a>
-        </div>
-    </div>
 
-    <div class="info-section">
-        <h2>Informações da Conta</h2>
-        <div class="info-grid">
-            <div class="info-item">
-                <strong>Usuário:</strong> {{ user.username }}
-            </div>
-            <div class="info-item">
-                <strong>Email:</strong> {{ user.email }}
-            </div>
-            <div class="info-item">
-                <strong>Conta criada em:</strong> {{ user.created_at.strftime('%d/%m/%Y às %H:%M') }}
-            </div>
-            <div class="info-item">
-                <strong>Status:</strong> 
-                <span class="badge badge-success">{{ 'Ativo' if user.is_active else 'Inativo' }}</span>
-            </div>
-        </div>
-    </div>
+</section>
+
+<section class="carousel-section">
+<div class="image-carousel" id="imageCarousel">
+<!-- As imagens seriam carregadas dinamicamente do banco de dados aqui. -->
+<!-- Por enquanto, usamos placeholders. -->
+<img class="carousel-image active" src="https://www.google.com/search?q=https://placehold.co/900x500/ff00ff/000000%3Ftext%3DArte%2BDigital%2B%25231" alt="Imagem 1" data-index="0">
+<img class="carousel-image" src="https://www.google.com/search?q=https://placehold.co/900x500/00ffff/000000%3Ftext%3DPaisagem%2BCiberpunk%2B%25232" alt="Imagem 2" data-index="1">
+<img class="carousel-image" src="https://www.google.com/search?q=https://placehold.co/900x500/ff3333/000000%3Ftext%3DAbstrato%2BNeon%2B%25233" alt="Imagem 3" data-index="2">
+<img class="carousel-image" src="https://www.google.com/search?q=https://placehold.co/900x500/00ff00/000000%3Ftext%3DGeometria%2BVibrante%2B%25234" alt="Imagem 4" data-index="3">
+
+    <button class="prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next-btn" onclick="changeSlide(1)">&#10095;</button>
 </div>
+
+<div class="carousel-indicators" id="carouselIndicators">
+    <!-- Indicadores JS serão injetados aqui -->
+</div>
+
+
+</section>
+
+<script>
+const carousel = document.getElementById('imageCarousel');
+const images = Array.from(carousel.querySelectorAll('.carousel-image'));
+const indicatorsContainer = document.getElementById('carouselIndicators');
+let currentIndex = 0;
+let autoRotateInterval;
+
+// --- Funções de Criação de Elementos ---
+
+function createIndicators() {
+    indicatorsContainer.innerHTML = &#39;&#39;;
+    images.forEach((_, index) =&gt; {
+        const indicator = document.createElement(&#39;span&#39;);
+        indicator.classList.add(&#39;indicator&#39;);
+        if (index === 0) {
+            indicator.classList.add(&#39;active&#39;);
+        }
+        indicator.dataset.index = index;
+        indicator.onclick = () =&gt; showSlide(index);
+        indicatorsContainer.appendChild(indicator);
+    });
+}
+
+function updateIndicators() {
+    const indicators = indicatorsContainer.querySelectorAll(&#39;.indicator&#39;);
+    indicators.forEach((indicator, index) =&gt; {
+        indicator.classList.toggle(&#39;active&#39;, index === currentIndex);
+    });
+}
+
+// --- Lógica do Carrossel ---
+
+function showSlide(index) {
+    // Garantir que o índice está dentro dos limites
+    currentIndex = (index + images.length) % images.length;
+    
+    images.forEach((img, i) =&gt; {
+        // Alternar a classe &#39;active&#39;
+        img.classList.toggle(&#39;active&#39;, i === currentIndex);
+    });
+    
+    updateIndicators();
+}
+
+function changeSlide(step) {
+    stopAutoRotate(); // Parar a rotação ao interagir
+    showSlide(currentIndex + step);
+    startAutoRotate(); // Reiniciar a rotação
+}
+
+function startAutoRotate() {
+    // Limpar qualquer intervalo anterior antes de iniciar um novo
+    if (autoRotateInterval) {
+        clearInterval(autoRotateInterval);
+    }
+    // Configurar intervalo para avançar a cada 5 segundos
+    autoRotateInterval = setInterval(() =&gt; {
+        showSlide(currentIndex + 1);
+    }, 5000);
+}
+
+function stopAutoRotate() {
+    if (autoRotateInterval) {
+        clearInterval(autoRotateInterval);
+    }
+}
+
+// --- Inicialização ---
+
+window.onload = function() {
+    createIndicators(); // Criar os indicadores
+    showSlide(0);      // Mostrar a primeira imagem
+    startAutoRotate(); // Iniciar a rotação automática
+
+    // Adicionar eventos de toque para navegação em dispositivos móveis
+    let touchstartX = 0;
+    let touchendX = 0;
+    
+    carousel.addEventListener(&#39;touchstart&#39;, e =&gt; {
+        touchstartX = e.changedTouches[0].screenX;
+    }, false);
+
+    carousel.addEventListener(&#39;touchend&#39;, e =&gt; {
+        touchendX = e.changedTouches[0].screenX;
+        handleGesture();
+    }, false);
+
+    function handleGesture() {
+        const sensitivity = 50; // Mínimo de pixels para considerar um swipe
+        const diff = touchendX - touchstartX;
+        
+        if (diff &gt; sensitivity) {
+            // Swipe para a direita (previous)
+            changeSlide(-1); 
+        } else if (diff &lt; -sensitivity) {
+            // Swipe para a esquerda (next)
+            changeSlide(1);
+        }
+    }
+};
+
+
+</script>
+
 {% endblock %}
